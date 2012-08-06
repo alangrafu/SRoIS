@@ -1,0 +1,55 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix schema: <http://schema.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <http://tw.rpi.edu/srs/> .
+
+#Vocab description
+:schema
+    a owl:Ontology;
+    owl:versionInfo "0.0.1";
+    rdfs:label "Semantic Description of Internet Services";
+    rdfs:comment "Vocabulary to describe Internet services (web servers, sparql endpoints, smtp servers, etc.)".
+
+#Basic classes
+
+:Host a rdfs:Class, owl:Class;
+         rdfs:label "Host".
+
+:Service a rdfs:Class, owl:Class ;
+   rdfs:label "Service" .
+
+
+#Taxonomy of Services
+
+:UdpService rdfs:subClassOf :Service;
+                   rdfs:label "UDP Service" .
+
+
+:TcpService rdfs:subClassOf :Service;
+                   rdfs:label "TCP Service" .
+
+:HttpService rdfs:subClassOf :TcpService ;
+                    rdfs:label "HTTP Service" .
+
+:SmtpService rdfs:subClassOf :TcpService ;
+                    rdfs:label "SMTP Service" .
+
+:SparqlEndpointService rdfs:subClassOf :HttpService;
+                                    rdfs:label "Sparql Endpoint Service" .
+
+
+#Predicates
+
+:runningPort a rdf:Property;
+             rdfs:label "Running port";
+             rdfs:domain :Service .
+
+:runningHost a rdf:Property;
+               rdfs:label "Running Host";
+               rdfs:domain :Service;
+               rdfs:range :Host .
+
+ 
